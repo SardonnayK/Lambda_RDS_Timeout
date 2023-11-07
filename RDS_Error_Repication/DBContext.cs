@@ -11,10 +11,11 @@ namespace RDS_Error_Repication
     {
         public DBContext()
         {
-
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         public DBContext(DbContextOptions<DBContext> options) : base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -68,29 +69,7 @@ namespace RDS_Error_Repication
             new CustomerInterestBridgeConfiguration().Configure(builder.Entity<CustomerInterestBridge>());
             new FavouriteStoreBridgeConfiguration().Configure(builder.Entity<FavouriteStoreBridge>());
             new FavouriteProductBridgeConfiguration().Configure(builder.Entity<FavouriteProductBridge>());
-            using (var context = new DBContext())
-            {
-                context.Customers.Add(new CustomerModel
-                {
-                    UUID = "26Yesql5fceBxmLRrWTecm6eolH3",
-                    ContactInformation = new ContactInformationModel
-                    {
-                        Email = "test@gmail.com",
-                        CellNumber = "0844456552",
-                        CustomerId = "26Yesql5fceBxmLRrWTecm6eolH3",
-                    },
-                    PopiInfo = new POPIInfoModel
-                    {
-                        Marketing = false,
-                        TermsAndConditions = false,
-                    },
-                    Name = "First Name",
-                    Surname = "Last Name",
-                    ExternalId = "asdasd",
-                });
 
-                context.SaveChanges();
-            }
             base.OnModelCreating(builder);
         }
 

@@ -24,18 +24,22 @@ if (configuration.GetValue<bool>("UseInMemoryDatabase"))
         options.UseLazyLoadingProxies().UseNpgsql(
             connectionString,
             x => x.EnableRetryOnFailure(2)
-           ));
+           ).LogTo(Console.WriteLine));
 
-
+    Console.WriteLine("The connection string is " + connectionString);
+    Console.WriteLine("Attempting to seed database");
     using (var sp = services.BuildServiceProvider())
     using (var readDBContext = sp.GetService<DBContext>())
+    {
         readDBContext?.Database.EnsureCreated();
+        Console.WriteLine("Ensure Creation Complete");
+
+        readDBContext.SaveChanges();
+    }
 
 }
 else
 {
-
-
 
     string connectionString = getConnectionString(builder.Configuration);
     services.AddDbContextFactory<DBContext>(options =>
@@ -49,10 +53,21 @@ else
     services.AddDbContext<DBContext>(options =>
     {
         options.UseLazyLoadingProxies().UseNpgsql(
-           $"Server=stage-cliquestack-stagecliquedbstagedatabase160b1c-33iyvzydopye.cluster-ctdibzq2basv.af-south-1.rds.amazonaws.com;Database= cliqueStage;Uid= postgres;Pwd= y^_mEkfZRVmv-AJEtZCLWeZ08.DL2q;",
+            connectionString,
             x => x.EnableRetryOnFailure(2)
            ).LogTo(Console.WriteLine);
     });
+
+
+    Console.WriteLine("The connection string is " + connectionString);
+    Console.WriteLine("Attempting to seed database");
+    using (var sp = services.BuildServiceProvider())
+    using (var readDBContext = sp.GetService<DBContext>())
+    {
+
+        readDBContext?.Database.EnsureCreated();
+        Console.WriteLine("Database seeding Complete");
+    }
 }
 
 
@@ -85,7 +100,6 @@ string getConnectionString(IConfiguration configuration)
 
     var request = new GetSecretValueRequest
     {
-
         SecretId = secretName
     };
 

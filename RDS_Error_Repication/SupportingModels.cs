@@ -17,9 +17,9 @@
 
     public abstract class AuditableEntity
     {
-        public DateTime Created { get; protected set; } = DateTime.UtcNow;
+        public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public string CreatedBy { get; protected set; }
+        public string CreatedBy { get; set; }
 
         public DateTime? LastModified { get; protected set; }
 
@@ -140,7 +140,7 @@
 
 
 
-    public class FavouriteProductBridge 
+    public class FavouriteProductBridge
     {
         public virtual CustomerModel Customer { get; set; }
         public string CustomerId { get; set; }

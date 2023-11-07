@@ -22,6 +22,10 @@ namespace RDS_Error_Repication.Controllers
             _dbContextFactory = dbContextFactory;
         }
 
+        /// <summary>
+        /// Adds a user to the database for testing purposes
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("/Add/DBContext/Customer")]
         public async Task<IActionResult> add()
@@ -51,6 +55,12 @@ namespace RDS_Error_Repication.Controllers
             _dbContext.SaveChanges();
             return Ok("User Created");
         }
+
+        /// <summary>
+        /// Gets the user will all the relationships attached
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("/DBContextRead")]
         public async Task<IActionResult> DBContextRead()
@@ -71,6 +81,10 @@ namespace RDS_Error_Repication.Controllers
             return Ok(customerModel?.Name);
         }
 
+        /// <summary>
+        /// Gets the Customer Only withou the relationships attached
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("DBContext/Read/Single/Customer")]
         public async Task<IActionResult> DBContextReadSingleCustomer()
@@ -84,6 +98,11 @@ namespace RDS_Error_Repication.Controllers
             Console.WriteLine($"The Method took {sw.ElapsedMilliseconds} ms to execute");
             return Ok(customerModel?.Name);
         }
+
+        /// <summary>
+        /// Reads the list of Customers without any relationships attached
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("DBContext/Read/Customers")]
         public async Task<IActionResult> DBContextReadCustomer()
@@ -97,6 +116,10 @@ namespace RDS_Error_Repication.Controllers
             return Ok(customerModels[0]?.Name);
         }
 
+        /// <summary>
+        /// Reads the Customer With their relationships Using a DBContext Factory
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("DBContextFactory/Read")]
         public async Task<IActionResult> DBContextFactoryRead()

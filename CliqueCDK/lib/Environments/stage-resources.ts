@@ -11,8 +11,8 @@ export const environmentMapping: EnvironmentOptions = {
 	databaseProps: {
 		dbName: "cliqueStage",
 
-		engine: DatabaseClusterEngine.auroraPostgres({
-			version: AuroraPostgresEngineVersion.VER_14_7,
+		engine: DatabaseClusterEngine.auroraMysql({
+			version: AuroraMysqlEngineVersion.VER_3_04_0,
 		}),
 		instanceType: new ec2.InstanceType("t3.medium"),
 		subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,

@@ -25,8 +25,9 @@ namespace RDS_Error_Repication
                 string connectionString = GetConnectionString();
                 if (connectionString != null)
                 {
-                    optionsBuilder.UseLazyLoadingProxies().UseNpgsql(
+                    optionsBuilder.UseLazyLoadingProxies().UseMySql(
                         connectionString,
+                         ServerVersion.AutoDetect(connectionString),
                         x => x.EnableRetryOnFailure(2)
                        );
                     return;

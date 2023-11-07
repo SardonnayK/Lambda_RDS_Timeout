@@ -21,8 +21,9 @@ if (configuration.GetValue<bool>("UseInMemoryDatabase"))
 {
     var connectionString = configuration.GetConnectionString("DefaultConnection");
     services.AddDbContextFactory<DBContext>(options =>
-        options.UseLazyLoadingProxies().UseNpgsql(
+        options.UseLazyLoadingProxies().UseMySql(
             connectionString,
+            ServerVersion.AutoDetect(connectionString),
             x => x.EnableRetryOnFailure(2)
            ).LogTo(Console.WriteLine));
 
@@ -44,16 +45,18 @@ else
     string connectionString = getConnectionString(builder.Configuration);
     services.AddDbContextFactory<DBContext>(options =>
     {
-        options.UseLazyLoadingProxies().UseNpgsql(
+        options.UseLazyLoadingProxies().UseMySql(
             connectionString,
+            ServerVersion.AutoDetect(connectionString),
             x => x.EnableRetryOnFailure(2)
            ).LogTo(Console.WriteLine);
     });
 
     services.AddDbContext<DBContext>(options =>
     {
-        options.UseLazyLoadingProxies().UseNpgsql(
+        options.UseLazyLoadingProxies().UseMySql(
             connectionString,
+            ServerVersion.AutoDetect(connectionString),
             x => x.EnableRetryOnFailure(2)
            ).LogTo(Console.WriteLine);
     });

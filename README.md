@@ -23,10 +23,13 @@ dotnet publish "RDS_Error_Repication/RDS_Error_Repication.csproj" --configuratio
 - If the cdk has not been bootstrapped, run `cdk bootstrap`. Ensure the CDK is bootstrapped to the correct AWS region.
 
 There is a couple of scripts available to handle deployment. The issue is most prevalent on the af-south-1 region.
-First we need to ensure that the correct environment variables are present in `.env`
+First we need to ensure that the correct environment variables are present in `.env`. All the values can be random values as they just need to pass the cdk synth checks.
 To deploy the code via the cdk run the command:
 
 PLEASE NOTE: the deployment scripts are non-interactive. If you need to review what is deployed, review the script manually. 
+
+The deployment configuration can be found under `CliqueCDK/lib/Environments`. The file is chosen based on the `ENVIRONMENT_NAME`
+specified in `.env`
 
 Run the command `sh cdk-af-south-1-deploy.sh` to deploy to south africa. The app needs to be published before we can deploy 
 and the cdk needs to be bootstrapped in the correct environments. 

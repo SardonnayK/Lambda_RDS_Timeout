@@ -1,0 +1,5 @@
+FROM public.ecr.aws/lambda/dotnet:6
+
+WORKDIR /var/task
+COPY "app/RDS_Error_Repication/publish"  ./
+CMD [ "RDS_Error_Repication" ]

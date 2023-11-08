@@ -22,14 +22,31 @@ namespace RDS_Error_Repication.Controllers
             _dbContextFactory = dbContextFactory;
         }
 
+        public void check()
+        {
+            Console.WriteLine("The connection string is " + _dbContext.Database.GetConnectionString());
+            _dbContext.Database.EnsureCreated();
+        }
+
+        [HttpGet]
+        [Route("/Health")]
         /// <summary>
         /// Adds a user to the database for testing purposes
         /// </summary>
         /// <returns></returns>
+        public async Task<IActionResult> senseCheck()
+        {
+            return Ok("Healthy");
+        }
         [HttpGet]
         [Route("/Add/DBContext/Customer")]
+        /// <summary>
+        /// Adds a user to the database for testing purposes
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> add()
         {
+            check();
             _dbContext.Customers.Add(new CustomerModel
             {
                 Created = DateTime.Now,
@@ -56,15 +73,16 @@ namespace RDS_Error_Repication.Controllers
             return Ok("User Created");
         }
 
+        [HttpGet]
+        [Route("/DBContextRead")]
         /// <summary>
         /// Gets the user will all the relationships attached
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [Route("/DBContextRead")]
         public async Task<IActionResult> DBContextRead()
         {
+            check();
             Console.WriteLine("The Method is entered");
             var sw = new Stopwatch();
             sw.Start();
@@ -89,6 +107,7 @@ namespace RDS_Error_Repication.Controllers
         [Route("DBContext/Read/Single/Customer")]
         public async Task<IActionResult> DBContextReadSingleCustomer()
         {
+            check();
             Console.WriteLine("The Method is entered");
             var sw = new Stopwatch();
             sw.Start();
@@ -107,6 +126,7 @@ namespace RDS_Error_Repication.Controllers
         [Route("DBContext/Read/Customers")]
         public async Task<IActionResult> DBContextReadCustomer()
         {
+            check();
             Console.WriteLine("The Method is entered");
             var sw = new Stopwatch();
             sw.Start();
@@ -124,7 +144,7 @@ namespace RDS_Error_Repication.Controllers
         [Route("DBContextFactory/Read")]
         public async Task<IActionResult> DBContextFactoryRead()
         {
-
+            check();
             Console.WriteLine("The Method is entered");
             var sw = new Stopwatch();
             sw.Start();

@@ -17,7 +17,7 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
 
-if (configuration.GetValue<bool>("UseInMemoryDatabase"))
+if (false)
 {
     var connectionString = configuration.GetConnectionString("DefaultConnection");
     services.AddDbContextFactory<DBContext>(options =>
@@ -63,14 +63,6 @@ else
 
 
     Console.WriteLine("The connection string is " + connectionString);
-    Console.WriteLine("Attempting to seed database");
-    using (var sp = services.BuildServiceProvider())
-    using (var readDBContext = sp.GetService<DBContext>())
-    {
-
-        readDBContext?.Database.EnsureCreated();
-        Console.WriteLine("Database seeding Complete");
-    }
 }
 
 

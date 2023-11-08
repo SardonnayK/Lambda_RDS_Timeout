@@ -43,13 +43,8 @@ export class CliqueDB extends Construct {
 			writer: aws_rds.ClusterInstance.provisioned("writer", {
 				instanceType: props.instanceType,
 				publiclyAccessible: true,
-				enablePerformanceInsights: true,
+				// enablePerformanceInsights: true,
 			}),
-			readers: [
-				aws_rds.ClusterInstance.provisioned("reader", {
-					promotionTier: 1,
-				}),
-			],
 			backup: props.backup,
 			preferredMaintenanceWindow: "Mon:03:00-Mon:03:30",
 		});
@@ -59,7 +54,7 @@ export class CliqueDB extends Construct {
 
 		//--------------DATABASE PROXY--------------------------
 
-		this.proxy = new aws_rds.DatabaseProxy(this, `${props.environmentName}Proxy`, {
+		this.proxy = new aws_rds.DatabaseProxy(this, `${props.environmentName}ProxyNew`, {
 			proxyTarget: aws_rds.ProxyTarget.fromCluster(instance),
 			secrets: [instance.secret!],
 			vpc: props.vpc,
@@ -70,8 +65,8 @@ export class CliqueDB extends Construct {
 			vpcSubnets: { subnetType: props.subnetType },
 			idleClientTimeout: Duration.minutes(20),
 		});
-		new CfnOutput(this, `${props.environmentName}-proxy-endpoint`, {
-			exportName: `${props.environmentName}-proxy-endpoint`,
+		new CfnOutput(this, `${props.environmentName}-proxy-endpointNew`, {
+			exportName: `${props.environmentName}-proxy-endpointNew`,
 			value: this.proxy.endpoint,
 		});
 	}

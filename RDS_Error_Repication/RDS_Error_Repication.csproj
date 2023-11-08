@@ -4,8 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<PublishReadyToRun>true</PublishReadyToRun>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

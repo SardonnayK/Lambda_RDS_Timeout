@@ -6,6 +6,32 @@ You can download Docker from https://www.docker.com/get-started
 You can download AWS CDK from https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html
 
 
+## Update the .env
+
+We first need to create a `.env` file inside the `CliqueCDK` directory. Copy the values from the `.dev.env` file
+to pass all the required checks.
+
+
+## Synthesize the App
+
+To synthesize the app we need to execute the `synthesize-cdk-stack.sh` shell scrip by running the command
+```
+sh synthesize-cdk-stack.sh
+```
+
+## Deploy the App
+
+To deploy the app we need to execute the `synthesize-cdk-stack.sh` shell scrip by running the command
+```
+sh deploy-cdk-stack.sh
+```
+The app will be deployed to the 
+
+
+# ALTERNATIVELY
+
+If you wish to deploy to different regions please have a look at the cdk-deploy scripts within the `CliqueCDK` Folder.
+
 ## Publish the Application Code
 
 To publish the API run the following commands:

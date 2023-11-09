@@ -21,7 +21,7 @@ sh synthesize-cdk-stack.sh
 
 ## Deploy the App
 
-To deploy the app we need to execute the `synthesize-cdk-stack.sh` shell scrip by running the command
+To deploy the app we need to execute the `deploy-cdk-stack.sh` shell scrip by running the command
 ```
 sh deploy-cdk-stack.sh
 ```
